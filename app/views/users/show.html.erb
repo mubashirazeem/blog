@@ -1,0 +1,57 @@
+<section class="section-sm border-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered mb-5 d-flex align-items-center">
+          <h1 class="h4"><%= current_user.user_name %>'s Profile</h1>
+          <ul class="list-inline social-icons ml-auto mr-3 d-none d-sm-block">
+            <li class="list-inline-item"><a href="#"><i class="ti-facebook"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="ti-twitter-alt"></i></a></li>
+            <li class="list-inline-item"><a href="#"><i class="ti-github"></i></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-4 mb-4 mb-md-0 text-center text-md-left">
+        <%= image_tag(current_user.image , class: "rounded-lg img-fluid") %>
+      </div>
+      <div class="col-lg-9 col-md-8 content text-center text-md-left">
+        <p> <%= @user.bio %> </p>
+        <%= link_to 'Edit Bio', edit_user_registration_path, class: "btn btn-info btn-lg" %>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="title text-center">
+          <h2 class="mb-5">Posted by this author</h2>
+        </div>
+      </div>
+      <% @blogs&.each do |blog| %>
+        <div class="col-lg-4 col-sm-6 mb-4">
+          <article class="mb-5">
+            <div class="post-slider slider-sm">
+                <%= image_tag(blog.image) %>
+            </div>
+            <h3 class="h5"><%= blog.title %></h3>
+            <ul class="list-inline post-meta mb-2">
+              <li class="list-inline-item"><i class="ti-user"></i><%= blog.user.user_name %></a>
+              </li>
+              <li class="list-inline-item">Date : <%= blog.created_at.strftime('%B %d, %Y') %></li>
+            </ul>
+            <p><%= blog.description %></p>
+            <%= link_to "Continue Reading", blog, class: "btn btn-info btn-lg" %>
+          </article>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
+
+
+

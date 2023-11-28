@@ -1,0 +1,13 @@
+<div class= "container">
+  <h1>Blogs</h1>
+
+  <ul>
+    <% @user_blogs.each do |blog| %>
+    <%= render blog  %>
+    <p>
+      <%= link_to "Show the post", blog %>
+    </p>
+    <% end %>
+  </ul>
+
+</div>

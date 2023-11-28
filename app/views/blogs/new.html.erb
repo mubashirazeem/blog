@@ -1,0 +1,29 @@
+<%
+=begin%>
+ <div>
+    <div>
+        <div>
+            <h1>New Blog</h1>
+
+            <%= form_with model: @blog do |form| %>
+              <div>
+                <%= form.label :title %><br>
+                <%= form.text_field :title %>
+              </div>
+
+              <div>
+                <%= form.label :body %><br>
+                <%= form.text_area :body %>
+              </div>
+
+              <div>
+                <%= form.submit %>
+              </div>
+            <% end %>
+        </div>
+    </div>
+</div> 
+<%
+=end%>
+
+<%= render "form", blog: @blog %>

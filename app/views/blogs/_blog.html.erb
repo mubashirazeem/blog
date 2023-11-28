@@ -1,0 +1,32 @@
+<div class="card">  
+  <div class="row mb-5">
+    <div class="col-12">
+      <div class="card-img-top">
+        <%= image_tag(blog.image, style: "width: 100%; height: 20% object-fit: fill") %>
+      </div>
+    </div>
+    <div class="col-lg-10 mx-auto card-body">
+      <h3><%= blog.title %></h3>
+      <ul class="list-inline post-meta mb-4 ml-2">
+        <li class="list-inline-item">Author: <i class="ti-user mr-2"></i><%= blog.user.user_name %></li>
+        <li class="list-inline-item">Created at:  <%= blog.created_at.strftime('%B %d, %Y') %></li>
+      </ul>  
+      <p>
+        <%= blog.description %>
+      </p>
+      <%= link_to "Continue Reading", blog, class: "btn btn-info btn-lg" %>
+    </div>
+  </div> 
+</div>
+<%
+=begin%>
+ 
+ <h1>
+  <%= blog.title %>
+</h1>
+
+<p>
+  <%= blog.description %>
+</p>   
+<%
+=end%>

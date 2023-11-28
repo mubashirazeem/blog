@@ -1,0 +1,118 @@
+<%
+=begin%>
+ <div class="login d-flex justify-content-center ">  
+  <div class="card w-50">  
+    <div class= "card-block">
+      <div class="d-flex justify-content-center ">
+        <h2>Sign up</h2>
+      </div>
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+        <%= render "devise/shared/error_messages", resource: resource %>
+
+        <div class="field">
+          <%= f.label :email %><br />
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: 'form-control'%>
+        </div>
+
+        <div class="field">
+          <%= f.label :user_name %><br />
+          <%= f.text_field :user_name, autof<%= f.label :user_name %><br />
+          <%= f.text_field :user_name, autofocus: true, autocomplete: "User Name" ,class: 'form-control'%>ocus: true, autocomplete: "User Name" ,class: 'form-control'%>
+        </div>
+
+        <div class="field">
+          <%= f.label :bio %><br />
+          <%= f.text_field :bio, autofocus: true, autocomplete: "Bio" ,class: 'form-control'%>
+        </div>
+
+        <div class="field">
+          <%= f.label :password %>
+          <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+          <%= f.password_field :password, autocomplete: "new-password" , class: 'form-control'%>
+        </div>
+
+        <div class="field">
+          <%= f.label :password_confirmation %><br />
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: 'form-control'%>
+        </div>
+        
+        <div class="field">
+          <%= f.label :image %>
+          <%= f.file_field :image, class: 'form-control' %>
+        </div>
+        
+        <div class="actions">
+          <%= f.submit "Sign up" ,class: 'btn btn-primary'%>
+        </div>
+      <% end %>
+      <%= render "devise/shared/links" %> 
+    </div>
+  </div>
+</div> 
+<%
+=end%>
+
+
+<section class="vh-100 bg-image"
+  style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+    <div class="container h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-5">
+              <h2 class="text-uppercase text-center mb-5">Create an account</h2>
+
+              <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+                <%= render "devise/shared/error_messages", resource: resource %>
+
+                <div class="form-outline mb-4">
+                  <%= f.label :email %><br />
+                  <%= f.email_field :email, autofocus: true, autocomplete: "email" ,class: 'form-control'%>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <%= f.label :user_name %><br />
+                  <%= f.text_field :user_name, autofocus: true, autocomplete: "User Name" ,class: 'form-control'%>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <%= f.label :bio %><br />
+                  <%= f.text_field :bio, autofocus: true, autocomplete: "Bio" ,class: 'form-control'%>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <%= f.label :password %>
+                  <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                  <% end %><br />
+                  <%= f.password_field :password, autocomplete: "new-password" , class: 'form-control'%>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <%= f.label :password_confirmation %><br />
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password" ,class: 'form-control'%>
+                </div>
+
+                <div class="form-outline mb-4">
+                  <%= f.label :image %>
+                  <%= f.file_field :image, class: 'form-control' %>
+                </div>
+
+                <div class="d-flex justify-content-center">
+                    <%= f.submit "Sign up" ,class: 'btn btn-info btn-lg btn-block'%>
+                </div>
+
+                <p class="text-center text-muted mt-5 mb-0">Have already an account? <%= render "devise/shared/links"%></p>
+                
+              <% end %>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

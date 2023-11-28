@@ -1,0 +1,45 @@
+<div class="masthead" style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');">
+  <div class="container px-4 px-lg-5">
+    <div class="row gx-4 gx-lg-5 justify-content-center">
+      <div class="col-md-10 col-lg-8 col-xl-7">
+        <div class="site-heading">
+          <h1>My Blog</h1>
+          <span class="subheading">Blog Site</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section-sm border-bottom">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered mb-5 d-flex align-items-center">
+          <ul class="list-inline social-icons ml-auto mr-3 d-none d-sm-block">
+            <li class="list-inline-item"><% if user_signed_in? %>
+              <%= link_to "New Blog", new_blog_path , class: "btn btn-info btn-lg btn-block"%>
+              <% end %></li>
+          </ul>
+        </div>
+      </div>
+  </div>
+</section>
+
+<div class= "container">
+  <h1 class="text-center mb-4">Blogs</h1>
+  <ul>
+    <% @blogs.each do |blog| %>
+      <%= render blog  %>
+    <% end %>
+    <nav aria-label="Page navigation">
+      <ul class="pagination justify-content-center">
+      <%== pagy_nav_bootstrap(@pagy) %>
+  </ul>
+    </nav>
+  </ul>
+  
+</div>
+
+
+
