@@ -12,7 +12,9 @@
         </div>
       </div>
       <div class="col-lg-3 col-md-4 mb-4 mb-md-0 text-center text-md-left">
+      <%if current_user&.image.attached? %>
         <%= image_tag(current_user.image , class: "rounded-lg img-fluid") %>
+      <% end %>  
       </div>
       <div class="col-lg-9 col-md-8 content text-center text-md-left">
         <p> <%= @user.bio %> </p>
@@ -35,8 +37,11 @@
       <% @blogs&.each do |blog| %>
         <div class="col-lg-4 col-sm-6 mb-4">
           <article class="mb-5">
-            <div class="post-slider slider-sm">
-                <%= image_tag(blog.image) %>
+            <div class="post-slider">
+              <%if blog&.image.attached? %>
+                <%#= image_tag(blog.image) , style: "width: 100%;"%>
+                <%= image_tag blog.image, style: "width: 100%; border-radius: 20px;" %>
+              <% end %>  
             </div>
             <h3 class="h5"><%= blog.title %></h3>
             <ul class="list-inline post-meta mb-2">
@@ -44,7 +49,10 @@
               </li>
               <li class="list-inline-item">Date : <%= blog.created_at.strftime('%B %d, %Y') %></li>
             </ul>
-            <p><%= blog.description %></p>
+            <p>
+            <%#= blog.description %>
+            <%= truncate_words(blog.description, 200) %>
+            </p>
             <%= link_to "Continue Reading", blog, class: "btn btn-info btn-lg" %>
           </article>
         </div>

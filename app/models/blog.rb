@@ -14,13 +14,4 @@ class Blog < ApplicationRecord
   def self.ransackable_associations(auth_object = nil)
     ["title", "description"]
   end
-
-  # def truncate_words(limit)
-  #   description_plain_text = description&.description&.to_plain_text
-  #   return if description_plain_text.nil?
-
-  #   truncate_words(description_plain_text, length: limit)
-  # end
-
-  
 end

@@ -113,25 +113,14 @@ h4 , h5 {
 }
 
 .post-slider {
+  width: 100%;
   overflow: hidden;
   margin-bottom: 20px;
-
-  img {
-    border-radius: inherit;
-  }
-
-  &:hover {
-    .prevArrow {
-      left: 10px;
-    }
-
-    .nextArrow {
-      right: 10px;
-    }
-  }
 }
 .slider-sm {
   height: 100%;
   width: 100%;
 }
-
+.comment-form{
+    display: none;
+}
