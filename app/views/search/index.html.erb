@@ -5,15 +5,15 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th><%= sort_link(@query, :title, "Title", default_order: :asc) %></th>
-        <th><%= sort_link(@query, :description, "Blog description") %></th>
+        <th><%= sort_link(@query, :title, "Title", default_order: :asc , style: "color :black") %></th>
+        <th><%= sort_link(@query, :description, "Blogs description" , style: "color :black") %></th>
       </tr>
     </thead>
     <tbody>
       <% @blog.each do |blog| %>
         <tr>
-          <td><%= link_to blog.title, blog %></td>
-          <td><%= blog.description %></td>
+          <td><%= link_to blog.title, blog , style: "color :black"%></td>
+          <td><%= truncate_words(blog.description, 20) %></td>
         </tr>
       <% end %>
     </tbody>

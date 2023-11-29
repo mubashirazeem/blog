@@ -1,5 +1,7 @@
-<section>
-  <% @blog.comments.each do |comment| %> 
+<%
+=begin%>
+ <section>
+  <% @blog.comments.where(parent_id: nil).each do |comment| %> 
     <div class="container text-dark">
       <div class="row d-flex justify-content-center">
         <div class="col-md-11 col-lg-9 col-xl-7">
@@ -11,7 +13,7 @@
                   <h5><%= comment.user.user_name %></h5>
                   <p class="small"><%= time_ago_in_words(comment.created_at) %></p>
                   <p><%= comment.body %> </p>
-                  
+                  <%= render "comment.comments" %>
                   <% if comment.user_id == current_user.id || comment.blog.user_id == current_user.id %>
                     <%= link_to 'Delete', blog_comment_path(@blog, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
                   <% end %>
@@ -24,4 +26,47 @@
       </div>
     </div>
   <% end %>
+</section> 
+<%
+=end%>
+
+
+
+<section>
+  <% @blog.comments.where(parent_id: nil).each do |parent_comment| %> 
+    <div class="container-md text-dark">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-11 col-lg-9 col-xl-7">
+          <div class="d-flex flex-start mb-4">
+            <%= render partial:"comments/comment" , locals: { comment:parent_comment, parent_comment: parent_comment }%>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
 </section>
+
+ 
+
+
+ <%
+=begin%>
+ <section class="gradient-custom">
+  <% @blog.comments.where(parent_id: nil).each do |parent_comment| %> 
+    <div class="container my-5 py-5">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-12 col-lg-10 col-xl-8">
+          <div class="card">
+            <div class="card-body p-4">
+              <%= render partial:"comments/comment" , locals: { comment:parent_comment, parent_comment: parent_comment }%>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</section>  
+<%
+=end%>
+
+
