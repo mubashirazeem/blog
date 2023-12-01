@@ -2,6 +2,7 @@ class BlogsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_blog, only: [ :show, :edit, :update, :destroy ]
   before_action :authorize_user, only: [ :edit , :update , :destroy ]
+  before_action :set_categories
   
   def index
     # @pagy, @blogs = pagy(Blog.order(created_at: :desc), items:5)
@@ -57,6 +58,10 @@ class BlogsController < ApplicationController
     @blog = Blog.find(params[:id])
   end
 
+  def set_categories
+    @categories = Category.all
+  end  
+
   def authorize_user
     unless current_user == @blog.user
       redirect_to @blog, alert: "You don't have permission to perform this action."
@@ -64,6 +69,6 @@ class BlogsController < ApplicationController
   end
 
   def blog_params
-    params.require(:blog).permit(:title, :description, :image)
+    params.require(:blog).permit(:title, :description, :image, :category_ids)
   end
 end

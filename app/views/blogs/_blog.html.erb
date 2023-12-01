@@ -13,7 +13,8 @@
       <h3><%= blog.title %></h3>
       <ul class="list-inline post-meta mb-4">
         <li class="list-inline-item">Author: <i class="ti-user mr-2"></i><%= blog.user.user_name %></li>
-        <li class="list-inline-item">Created at:  <%= blog.created_at.strftime('%B %d, %Y') %></li>
+        <li class="list-inline-item">Created at: <%= blog.created_at.strftime('%B %d, %Y') %></li>
+        <li class="list-inline-item">Category: <%= link_to blog.categories.pluck(:name).join(', '), category_path(blog.categories.first) , style: "color :black"%></li> 
       </ul>  
       <p>
         <%#= blog.description %>

@@ -6,6 +6,7 @@
         <ul class="list-inline post-meta mb-3">
           <li class="list-inline-item"><i class="ti-user"></i><%= @blog.user.user_name %></a></li>
           <li class="list-inline-item">Date: <%= @blog.created_at.strftime('%B %d, %Y') %></li>
+          <li class="list-inline-item">Category: <%= @blog.categories.pluck(:name).join(' , ') %></li>
         </ul>
       </div>
       <div class="col-12 mb-3">

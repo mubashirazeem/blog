@@ -7,3 +7,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+Category.create(name: "Fiction")
+Category.create(name: "Nature")
+Category.create(name: "Biography")
+Category.create(name: "Poetry")
+Category.create(name: "Political")
+Category.create(name: "Funny")

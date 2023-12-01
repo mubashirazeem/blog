@@ -1,0 +1,35 @@
+<div class= "container rounded">
+  <h1>Blogs in Category: <%= @category.name %></h1>
+
+  <% if @blogs.any? %>
+      <% @blogs.each do |blog| %>
+        <div class="card" style="border-radius:20px;">  
+          <div class="row mb-5">
+            <div class="col-12">
+              <div class="card-img-top">
+                <%if blog&.image.attached? %>
+                  <%= link_to blog_path(blog) do %>
+                    <%= image_tag(blog.image, style: "width: 100%; height: 20%; object-fit: fill; padding: 4px; border-radius: 20px;") %>
+                  <% end %>
+                <% end %>
+              </div>
+            </div>
+            <div class="col-lg-10 mx-auto card-body">
+              <h3><%= blog.title %></h3>
+              <ul class="list-inline post-meta mb-4">
+                <li class="list-inline-item">Author: <i class="ti-user mr-2"></i><%= blog.user.user_name %></li>
+                <li class="list-inline-item">Created at: <%= blog.created_at.strftime('%B %d, %Y') %></li>
+                <li class="list-inline-item">Category: <%= blog.categories.pluck(:name).join(' , ') %></li> 
+              </ul>  
+              <p>
+                <%= truncate_words(blog.description, 500) %>
+              </p>
+              <%= link_to "Continue Reading", blog, class: "btn btn-info btn-lg" %>
+            </div>
+          </div> 
+        <br><br>
+      <% end %>
+  <% else %>
+    <p>No blogs in this category.</p>
+  <% end %>
+</div>  

@@ -2,7 +2,7 @@
   <div class="mask d-flex align-items-center h-100 gradient-custom-3">
     <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
-        <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div class="col-12 col-md-10 col-lg-10 col-xl-9">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
               <h1>New Blog</h1>
@@ -11,13 +11,20 @@
                   <%= form.label :title %><br>
                   <%= form.text_field :title , required: true %>
                 </div>
+                <br>
                 <div>
                   <%= form.label :description %><br>
                   <%= form.rich_text_area :description , required: true %>
                 </div>
+                <br>
                 <div>
                   <%= form.label :image %>
-                  <%= form.file_field :image %>
+                  <%= form.file_field :image , required: true%>
+                </div>
+                 <div>
+                  <%= form.label :categories, 'Select Categories' %>
+                  <%= form.collection_select(:category_ids, Category.all, :id, :name) %>
+                  <%#= form.collection_select(:category_ids, Category.all, :id, :name, {}, { multiple: true }) %>
                 </div>
                 <div>
                   <%= button_tag "Submit", type: "submit", class: "btn btn-info btn-lg btn-block" %>

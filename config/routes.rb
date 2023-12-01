@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   # root "blogs#index"
 
   root to: "home#index" 
+  resources :category, only: [:show]
 
 
   resources :blogs do

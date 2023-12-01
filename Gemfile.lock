@@ -84,6 +84,8 @@ GEM
       minitest (>= 5.1)
       mutex_m
       tzinfo (~> 2.0)
+    acts-as-taggable-on (10.0.0)
+      activerecord (>= 6.1, < 7.2)
     addressable (2.8.5)
       public_suffix (>= 2.0.2, < 6.0)
     arbre (1.7.0)
@@ -319,6 +321,7 @@ PLATFORMS
 
 DEPENDENCIES
   activeadmin
+  acts-as-taggable-on
   bootsnap
   bootstrap (~> 5.3, >= 5.3.2)
   byebug

@@ -5,7 +5,8 @@ class Blog < ApplicationRecord
   has_one_attached :image
   has_rich_text :description
   validate :owner_can_delete, on: :destroy
-
+  
+  has_and_belongs_to_many :categories
   
   def self.ransackable_attributes(auth_object = nil)
     %w[title description] # Add any other attributes you want to make searchable
