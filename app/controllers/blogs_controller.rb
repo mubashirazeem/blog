@@ -15,7 +15,9 @@ class BlogsController < ApplicationController
     end
   end
   
-  def show; end
+  def show;
+    # mark_notifications_as_read
+  end
   
   def new
     @blog = Blog.new
@@ -71,4 +73,11 @@ class BlogsController < ApplicationController
   def blog_params
     params.require(:blog).permit(:title, :description, :image, :category_ids)
   end
+
+  # def mark_notifications_as_read
+  #   if current_user
+  #     notifications_to_mark_as_read = @blog.notifications_as_blog.where(recipient: current_user)
+  #     notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
+  #   end
+  # end
 end

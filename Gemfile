@@ -85,3 +85,5 @@ gem "rolify"
 gem 'activeadmin'
 
 gem 'acts-as-taggable-on'
+
+gem 'noticed'

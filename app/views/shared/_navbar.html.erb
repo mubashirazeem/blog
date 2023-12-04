@@ -105,8 +105,9 @@
           </li>
         </ul>
       </div>
+      <%= render 'shared/notifications' %>
       <%= render 'search/form', class: 'form-inline my-2 my-lg-0' %>
-      <% else %>
+    <% else %>
        <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">  
           <li class="nav-item">
@@ -115,7 +116,7 @@
           <li class="nav-item">
             <%= link_to "Sign in", new_user_session_path, class: "nav-link" %>
           </li>
-        </ul> 
+        </ul>
         <%= render 'search/form', class: 'form-inline my-2 my-lg-0' %>
     <% end %>
   </div>

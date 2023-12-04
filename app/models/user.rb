@@ -8,4 +8,6 @@ class User < ApplicationRecord
   has_one_attached :image
   has_many :blogs , dependent: :destroy
   has_many :comments , dependent: :destroy
+
+  has_many :notifications, as: :recipient, dependent: :destroy
 end

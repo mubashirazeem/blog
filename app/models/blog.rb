@@ -7,6 +7,9 @@ class Blog < ApplicationRecord
   validate :owner_can_delete, on: :destroy
   
   has_and_belongs_to_many :categories
+
+  has_noticed_notifications model_name: "Notification"
+  has_many :notifications, through: :user, dependent: :destroy
   
   def self.ransackable_attributes(auth_object = nil)
     %w[title description] # Add any other attributes you want to make searchable
