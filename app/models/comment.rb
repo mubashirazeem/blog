@@ -1,8 +1,7 @@
 class Comment < ApplicationRecord
-  belongs_to :user
-  belongs_to :blog
-  belongs_to :parent, class_name: "Comment" , optional: true
-  has_many :comments, foreign_key: :parent_id , dependent: :destroy
+  belongs_to :user 
+  belongs_to :commentable, polymorphic: true
+  has_many :comments, dependent: :destroy, as: :commentable
   
   validates :body, presence: true,  allow_blank: false
 
@@ -13,7 +12,8 @@ class Comment < ApplicationRecord
   private
 
   def notify_recipient
-    CommentNotification.with(comments: self, blog: blog).deliver_later(blog.user)
+    blog = commentable if commentable_type == 'Blog'
+    CommentNotification.with(comments: self, blog: blog).deliver_later(blog.user) if blog
   end
 
   def cleanup_notifications

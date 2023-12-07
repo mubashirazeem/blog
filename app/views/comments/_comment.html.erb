@@ -1,5 +1,19 @@
 
-<div class="card w-100">
+
+
+<%
+=begin%>
+ <p><strong><%= comment.user.username %></strong>: <%= comment.body %></p>
+<%= render partial: 'comments/comment', collection: comment.replies %>
+<%= render 'comments/new', commentable: comment, comment: Comment.new %> 
+<%
+=end%>
+
+
+
+<%
+=begin%>
+ <div class="card w-100">
   <div class="card-body p-4">
     <div class="">
       <h5 class= "card-title"><%= parent_comment.user.user_name %></h5>
@@ -18,10 +32,14 @@
       <% end %>
     </div>
   </div>
-</div>  
+</div>   
+<%
+=end%>
 
 
-
+<%
+=begin%>
+ 
 <script>
   document.querySelectorAll('.comment-form-display').forEach((el) => {
     el.addEventListener('click', (ev) => {
@@ -29,7 +47,9 @@
       el.nextElementSibling.style.display = 'block';
     });
   });
-</script> 
+</script>  
+<%
+=end%>
 
 <%
 =begin%>

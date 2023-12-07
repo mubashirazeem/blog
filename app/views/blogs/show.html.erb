@@ -27,8 +27,6 @@
   </div>
 </section>
 
-<div id="comment_pane">
   <%= render 'comments/show' %>
-  <%#= render 'comment.comments' %>
-  <%= render 'comments/new' %>
-</div>
+  <%= render partial: 'comments/new' , locals: { commentable: @blog, comment: @blog.comments.new }%>
+

@@ -17,17 +17,36 @@ class CommentNotification < Noticed::Base
 
   # Define helper methods to make rendering easier.
   #
+  # def message
+  #   @comment = params[:comments]
+  #   # @blog = @comment.new ? Blog.find(@comment.new) : Blog.find(@comment.blog_id)
+  #   @blog = @comment.new_record? ? Blog.find(@comment.commentable_id) : Blog.find(@comment.commentable_id)
+  #   @user = User.find(@comment.user_id)
+  #   "#{@user.user_name} commented on #{@blog.title.truncate(10)}"
+  # end
+
   def message
     @comment = params[:comments]
-    @blog = @comment.parent_id ? Blog.find(@comment.parent_id) : Blog.find(@comment.blog_id)
+    
+    return "Invalid comment" unless @comment
+  
+    if @comment.new_record?
+      @blog = Blog.find(@comment.commentable_id) if @comment.commentable_type == 'Blog'
+    else
+      @blog = Blog.find(@comment.commentable_id) if @comment.commentable_type == 'Blog'
+    end
+  
     @user = User.find(@comment.user_id)
     "#{@user.user_name} commented on #{@blog.title.truncate(10)}"
   end
+  
 
   def url
-    blog_path(Blog.find(params[:comments][:blog_id]))
+    blog_path(Blog.find(params[:comments][:commentable_id]))
     blog_path(@blog)
   end
+
+
   # def message
   #   t(".message")
   # end

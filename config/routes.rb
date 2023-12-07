@@ -26,11 +26,14 @@ Rails.application.routes.draw do
     end
   end
   # root "blogs#index"
-  resources :blogs do 
-    resources :comments
-  end  
-
-  # get "/blogs", to: "blogs#index"
+  resources :blogs, only: [:show] do
+    resources :comments, only: [:show, :index, :new, :create, :destroy]
+  end
+  
+  resources :comments, only: [:show] do
+    resources :comments, only: [:show, :index, :new, :create, :destroy]
+  end
+      # get "/blogs", to: "blogs#index"
   # get "/blogs/:id", to: "blogs#show"
   # get "blogs/index"
   # get "blogs/show"
