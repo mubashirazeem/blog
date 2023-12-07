@@ -7,10 +7,7 @@
             <div class="card-body p-5">
               <% if user_signed_in? %>
                 <h2>Add a comment:</h2>
-                <%= form_with model: [ @blog, @blog.comments.build ] do |form| %>
-                  <% if defined?(parent_id) %>
-                    <%= form.hidden_field :parent_id, value: parent_id  %>
-                    <%end%>
+                <%= form_for [commentable, Comment.new] do |form| %>
                   <div class="form-group">
                     <%= form.text_area :body, class: "form-control", rows: 3 %>
                   </div>  

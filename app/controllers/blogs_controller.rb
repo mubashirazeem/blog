@@ -16,7 +16,10 @@ class BlogsController < ApplicationController
   end
   
   def show;
-    # mark_notifications_as_read
+    mark_notifications_as_read
+
+    @comment = Comment.new
+    @comments = @blog.comments
   end
   
   def new
@@ -74,10 +77,11 @@ class BlogsController < ApplicationController
     params.require(:blog).permit(:title, :description, :image, :category_ids)
   end
 
-  # def mark_notifications_as_read
-  #   if current_user
-  #     notifications_to_mark_as_read = @blog.notifications_as_blog.where(recipient: current_user)
-  #     notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
-  #   end
-  # end
+  def mark_notifications_as_read
+    if current_user
+      notifications_to_mark_as_read = @blog.notifications_as_blog.where(recipient: current_user, read_at: nil)
+      notifications_to_mark_as_read.update_all(read_at: Time.zone.now)
+    end
+  end
+  
 end

@@ -1,6 +1,6 @@
 class Blog < ApplicationRecord
   belongs_to :user
-  has_many :comments , dependent: :destroy
+  has_many :comments , dependent: :destroy, as: :commentable
   
   has_one_attached :image
   has_rich_text :description

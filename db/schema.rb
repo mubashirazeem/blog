@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_12_04_104343) do
+ActiveRecord::Schema[7.1].define(version: 2023_12_04_143057) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -74,11 +74,11 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_104343) do
   create_table "comments", force: :cascade do |t|
     t.integer "user_id", null: false
     t.text "body"
-    t.integer "blog_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "parent_id"
-    t.index ["blog_id"], name: "index_comments_on_blog_id"
+    t.string "commentable_type"
+    t.integer "commentable_id"
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
@@ -107,7 +107,10 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_104343) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
-    t.string "user_name", default: "", null: false
+
+
+
+
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
@@ -132,6 +135,5 @@ ActiveRecord::Schema[7.1].define(version: 2023_12_04_104343) do
   add_foreign_key "blogs", "users"
   add_foreign_key "blogs_categories", "blogs"
   add_foreign_key "blogs_categories", "categories"
-  add_foreign_key "comments", "blogs"
   add_foreign_key "comments", "users"
 end

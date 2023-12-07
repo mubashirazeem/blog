@@ -1,44 +1,39 @@
-<%
-=begin%>
- <section>
-  <% @blog.comments.where(parent_id: nil).each do |comment| %> 
-    <div class="container text-dark">
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-11 col-lg-9 col-xl-7">
-          <div class="d-flex flex-start mb-4">
-            <%#= image_tag(current_user.image, class: "rounded-circle shadow-1-strong me-3", width: 65, height: 65) %>
-            <div class="card w-100">
-              <div class="card-body p-4">
-                <div class="">
-                  <h5><%= comment.user.user_name %></h5>
-                  <p class="small"><%= time_ago_in_words(comment.created_at) %></p>
-                  <p><%= comment.body %> </p>
-                  <%= render "comment.comments" %>
-                  <% if comment.user_id == current_user.id || comment.blog.user_id == current_user.id %>
-                    <%= link_to 'Delete', blog_comment_path(@blog, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-danger' %>
-                  <% end %>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</section> 
-<%
-=end%>
-
-
-
 <section>
-  <% @blog.comments.where(parent_id: nil).each do |parent_comment| %> 
+  <% @comments.each do |comment| %> 
     <div class="container-md text-dark">
       <div class="row d-flex justify-content-center">
         <div class="col-md-11 col-lg-9 col-xl-7">
           <div class="d-flex flex-start mb-4">
-            <%= render partial:"comments/comment" , locals: { comment:parent_comment, parent_comment: parent_comment }%>
+            <div class="card w-100">
+              <div class="card-body p-4">
+                <div class="">
+                  <h5 class= "card-title"><%= comment.user.user_name %></h5>
+                  <p class="small"><%= time_ago_in_words(comment.created_at) %></p>
+                  <p><%= comment.body %> </p>
+                  <%# if current_user.has_role? :admin || comment.user_id == current_user.id %>
+                  <%# if comment.user_id == current_user.id || comment.blog.user_id == current_user.id %>
+                  <%# if comment.user_id == current_user.id || (comment.commentable_type == "Blog" && comment.commentable.user_id == current_user.id) %>  
+                    <%= link_to 'Delete', blog_comment_path(@blog, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure" }, class: 'btn btn-danger' %>
+                  <%# end %>
+                  <a href="#" class="comment-form-display btn btn-primary m-3 p-2">reply</a>
+                  <div class="comment-form" style="display: none;" >
+                    <%= render partial: 'comments/new' , locals: {commentable: comment}%>
+                  </div> 
+                  <% if comment.comments.any? %>
+                    <% comment.comments.each do |nested_comment| %>                    
+                      <div class="card ml-5 mb-2">
+                        <div class="card-body">
+                          <h5 class= "card-title"><%= nested_comment.user&.user_name %></h5>
+                          <p class="small"><%= time_ago_in_words(nested_comment.created_at) if nested_comment.created_at %></p>
+                          <p><%= nested_comment.body %> </p>
+                          <%= link_to 'Delete', blog_comment_path( comment, nested_comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure" }, class: 'btn btn-danger' %>
+                        </div>
+                      </div>                  
+                    <% end %>
+                  <% end %>  
+                </div>
+              </div>
+            </div> 
           </div>
         </div>
       </div>
@@ -48,25 +43,13 @@
 
  
 
-
- <%
-=begin%>
- <section class="gradient-custom">
-  <% @blog.comments.where(parent_id: nil).each do |parent_comment| %> 
-    <div class="container my-5 py-5">
-      <div class="row d-flex justify-content-center">
-        <div class="col-md-12 col-lg-10 col-xl-8">
-          <div class="card">
-            <div class="card-body p-4">
-              <%= render partial:"comments/comment" , locals: { comment:parent_comment, parent_comment: parent_comment }%>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  <% end %>
-</section>  
-<%
-=end%>
-
+<script>
+  document.querySelectorAll('.comment-form-display').forEach((el) => {
+    el.addEventListener('click', (ev) => {
+      ev.preventDefault();
+      const commentForm = el.nextElementSibling;
+      commentForm.style.display = (commentForm.style.display === 'block') ? 'none' : 'block';
+    });
+  });
+</script>
 
