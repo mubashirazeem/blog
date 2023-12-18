@@ -1,12 +1,10 @@
 class BlogsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
   before_action :set_blog, only: [ :show, :edit, :update, :destroy ]
   before_action :authorize_user, only: [ :edit , :update , :destroy ]
   before_action :set_categories
   
   def index
-    # @pagy, @blogs = pagy(Blog.order(created_at: :desc), items:5)
-    # @user_blogs = current_user.blogs
     if user_signed_in?
       @pagy, @blogs = pagy(Blog.order(created_at: :desc), items: 5)
       @user_blogs = current_user.blogs
@@ -68,13 +66,14 @@ class BlogsController < ApplicationController
   end  
 
   def authorize_user
-    unless current_user == @blog.user
+    @blog = Blog.find(params[:id])
+    unless current_user == @blog.user || current_user.has_role?(:admin) || current_user.has_role?(:editor)
       redirect_to @blog, alert: "You don't have permission to perform this action."
     end
   end
 
   def blog_params
-    params.require(:blog).permit(:title, :description, :image, :category_ids)
+    params.require(:blog).permit(:title, :description, :image, category_ids: [])
   end
 
   def mark_notifications_as_read

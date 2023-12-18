@@ -12,10 +12,10 @@ class Blog < ApplicationRecord
   has_many :notifications, through: :user, dependent: :destroy
   
   def self.ransackable_attributes(auth_object = nil)
-    %w[title description] # Add any other attributes you want to make searchable
+    %w[title description created_at user_email_cont]
   end
 
   def self.ransackable_associations(auth_object = nil)
-    ["title", "description"]
+    []
   end
 end

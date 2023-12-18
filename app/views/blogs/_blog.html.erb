@@ -14,26 +14,15 @@
       <ul class="list-inline post-meta mb-4">
         <li class="list-inline-item">Author: <i class="ti-user mr-2"></i><%= blog.user.user_name %></li>
         <li class="list-inline-item">Created at: <%= blog.created_at.strftime('%B %d, %Y') %></li>
-        <li class="list-inline-item">Category: <%= link_to blog.categories.pluck(:name).join(', '), category_path(blog.categories.first) , style: "color :black"%></li> 
+        <li class="list-inline-item">Categories: <%= blog.categories.map { |category| link_to(category.name, category_path(category), style: 'color: black') }.join(', ').html_safe %></li>
       </ul>  
       <p>
-        <%#= blog.description %>
         <%= truncate_words(blog.description, 500) %>
       </p>
-      <%= link_to "Continue Reading", blog, class: "btn btn-info btn-lg" %>
+      <div class="d-flex">
+        <%= link_to "Continue Reading", blog, class: "btn btn-info btn-lg" %>
+      </div>
     </div>
   </div> 
 </div>
 <br><br>
-<%
-=begin%>
- 
- <h1>
-  <%= blog.title %>
-</h1>
-
-<p>
-  <%= blog.description %>
-</p>   
-<%
-=end%>

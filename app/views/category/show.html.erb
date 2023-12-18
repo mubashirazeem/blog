@@ -1,9 +1,11 @@
 <div class= "container rounded">
-  <h1>Blogs in Category: <%= @category.name %></h1>
+  <div class="text-center mt-5 mb-3 border-bottom">
+    <h1>Blogs in Category: <%= @category.name %></h1>
+  </div>
 
   <% if @blogs.any? %>
       <% @blogs.each do |blog| %>
-        <div class="card" style="border-radius:20px;">  
+        <div class="card " style="border-radius:20px;">  
           <div class="row mb-5">
             <div class="col-12">
               <div class="card-img-top">
