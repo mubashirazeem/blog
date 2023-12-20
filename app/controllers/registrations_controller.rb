@@ -44,7 +44,16 @@ class RegistrationsController < Devise::RegistrationsController
   # def image
   #   image.presence || 'default_image.jpg'
   # end
-
+  
+  
+  # stripe_customer = Stripe::Customer.create(
+  #   name: current_user.email,
+  #   name: current_user.user_name,
+  #   description: current_user.bio,
+  # )
+  # current_user.update(stripe_customer_id: stripe_customer.id)
+  
+  
   protected
 
 

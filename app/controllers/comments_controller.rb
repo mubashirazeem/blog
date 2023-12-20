@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-  before_action :authenticate_user!
+  # before_action :authenticate_user!
 
   def create
     @commentable = params[:blog_id].present? ? Blog.find(params[:blog_id]) : Comment.find(params[:comment_id])
@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
       if @comment.save 
         format.html { redirect_to blog_comments_path(current_user, @comment) }
       else
-        format.html { render :new }
+        format.html { redirect_to blog_comments_path(current_user, @comment) }
       end
     end
   end

@@ -1,3 +1,7 @@
 <li class="dropdown-item">
-  <%= link_to notification.to_notification.message, notification.to_notification.url %>
+  <% if notification.to_notification.url.present? %>
+    <%= link_to notification.to_notification.message, notification.to_notification.url %>
+  <% else %>
+    <%= "Notification link not available" %>
+  <% end %>
 </li>

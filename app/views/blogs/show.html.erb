@@ -1,4 +1,4 @@
-<section class="section">
+<section class="section mt-5">
   <div class="container">
     <article class="row mb-4">
       <div class="col-lg-10 mx-auto mb-4">
@@ -20,8 +20,12 @@
         <div class="content">
           <p><%= @blog.description %></p>
         </div>
+      <% if user_signed_in? && (current_user.has_role?(:admin) || current_user.has_role?(:editor)) || current_user == @blog.user %>  
         <%= link_to "Edit", edit_blog_path(@blog) , class: "btn btn-info btn-lg " %>
+      <% end %>
+      <% if user_signed_in? && (current_user.has_role?(:admin) || current_user == @blog.user) %>
         <%= link_to "Delete", blog_path(@blog), data: { turbo_method: :delete, turbo_confirm: "Are you sure?" } , class: "btn btn-info btn-lg "%>
+      <% end %>
       </div>
     </article>
   </div>

@@ -89,3 +89,9 @@ gem 'acts-as-taggable-on'
 gem 'noticed'
 
 gem 'pry'
+
+gem 'stripe'
+
+gem 'stripe_webhooks'
+
+gem 'stripe_event'

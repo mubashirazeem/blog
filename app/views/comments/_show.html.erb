@@ -1,4 +1,4 @@
-<section>
+ <section>
   <% @comments.each do |comment| %> 
     <div class="container-md text-dark">
       <div class="row d-flex justify-content-center">
@@ -9,12 +9,10 @@
                 <div class="">
                   <h5 class= "card-title"><%= comment.user.user_name %></h5>
                   <p class="small"><%= time_ago_in_words(comment.created_at) %></p>
-                  <p><%= comment.body %> </p>
-                  <%# if current_user.has_role? :admin || comment.user_id == current_user.id %>
-                  <%# if comment.user_id == current_user.id || comment.blog.user_id == current_user.id %>
-                  <%# if comment.user_id == current_user.id || (comment.commentable_type == "Blog" && comment.commentable.user_id == current_user.id) %>  
+                  <p><%= comment.body %> </p>  
+                  <% if user_signed_in? && (current_user.has_role? :admin || current_user == comment.user) %>
                     <%= link_to 'Delete', blog_comment_path(@blog, comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure" }, class: 'btn btn-danger' %>
-                  <%# end %>
+                  <% end %>
                   <a href="#" class="comment-form-display btn btn-primary m-3 p-2">reply</a>
                   <div class="comment-form" style="display: none;" >
                     <%= render partial: 'comments/new' , locals: {commentable: comment}%>
@@ -26,7 +24,9 @@
                           <h5 class= "card-title"><%= nested_comment.user&.user_name %></h5>
                           <p class="small"><%= time_ago_in_words(nested_comment.created_at) if nested_comment.created_at %></p>
                           <p><%= nested_comment.body %> </p>
-                          <%= link_to 'Delete', blog_comment_path( comment, nested_comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure" }, class: 'btn btn-danger' %>
+                          <% if user_signed_in? && (current_user.has_role? :admin || current_user == comment.user) %>
+                            <%= link_to 'Delete', blog_comment_path( comment, nested_comment), data: { turbo_method: :delete, turbo_confirm: "Are you sure" }, class: 'btn btn-danger' %>
+                          <% end %>
                         </div>
                       </div>                  
                     <% end %>

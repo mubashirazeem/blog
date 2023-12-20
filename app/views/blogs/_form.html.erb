@@ -23,8 +23,9 @@
                 </div>
                  <div>
                   <%= form.label :categories, 'Select Categories' %>
-                  <%= form.collection_select(:category_ids, Category.all, :id, :name) %>
+                  <%#= form.collection_select(:category_ids, Category.all, :id, :name) %>
                   <%#= form.collection_select(:category_ids, Category.all, :id, :name, {}, { multiple: true }) %>
+                  <%= form.collection_select(:category_ids, Category.all, :id, :name, { }, { class: 'form-control', multiple: true }) %>
                 </div>
                 <div>
                   <%= button_tag "Submit", type: "submit", class: "btn btn-info btn-lg btn-block" %>

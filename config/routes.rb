@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   get 'users/show'
   get 'search', to: 'search#index'
   # get 'home/index'
@@ -16,10 +18,13 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "blogs#index"
 
-  root to: "home#index" 
+  root to: "blogs#index" 
   resources :category, only: [:show]
 
+  resources :stripe, only: [:create, :index ]
 
+  get 'checkout/success', to: 'stripe#handle_payment_success'
+ 
   resources :blogs do
     collection do
       get 'user_blogs', to: 'blogs#user_blogs', as: 'current_user_blogs'
@@ -33,7 +38,7 @@ Rails.application.routes.draw do
   resources :comments, only: [:show] do
     resources :comments, only: [:show, :index, :new, :create, :destroy]
   end
-      # get "/blogs", to: "blogs#index"
+  # get "/blogs", to: "blogs#index"
   # get "/blogs/:id", to: "blogs#show"
   # get "blogs/index"
   # get "blogs/show"
