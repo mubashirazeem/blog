@@ -7,9 +7,9 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     respond_to do |format|
       if @comment.save 
-        format.html { redirect_to blog_comments_path(current_user, @comment) }
+        redirect_to blog_comments_path(current_user, @comment)
       else
-        format.html { redirect_to blog_comments_path(current_user, @comment) }
+        redirect_to blog_comments_path(current_user, @comment)
       end
     end
   end

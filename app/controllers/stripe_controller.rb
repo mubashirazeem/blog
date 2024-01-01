@@ -32,9 +32,6 @@ class StripeController < ApplicationController
   def handle_payment_success
     if current_user.present?
       current_user.update(payment_status: 'paid')
-      Rails.logger.info("Payment succeeded for user: #{current_user.email}")
-    else
-      Rails.logger.error("User not found for payment_intent: #{payment_intent['id']}")
     end
     redirect_to root_url
   end

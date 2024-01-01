@@ -5,11 +5,13 @@
         <div class="col-12 col-md-10 col-lg-10 col-xl-9">
           <div class="card" style="border-radius: 15px;">
             <div class="card-body p-5">
-              <h1>New Blog</h1>
+              <div class="text-center">
+                <h1>New Blog</h1>
+              </div>  
               <%= form_with model: @blog do |form| %>
                 <div>
                   <%= form.label :title %><br>
-                  <%= form.text_field :title , required: true %>
+                  <%= form.text_field :title , required: true, style: "width: 100%;" %>
                 </div>
                 <br>
                 <div>
@@ -21,12 +23,14 @@
                   <%= form.label :image %>
                   <%= form.file_field :image , required: true%>
                 </div>
-                 <div>
+                <br>
+                <div>
                   <%= form.label :categories, 'Select Categories' %>
                   <%#= form.collection_select(:category_ids, Category.all, :id, :name) %>
                   <%#= form.collection_select(:category_ids, Category.all, :id, :name, {}, { multiple: true }) %>
                   <%= form.collection_select(:category_ids, Category.all, :id, :name, { }, { class: 'form-control', multiple: true }) %>
                 </div>
+                <br>
                 <div>
                   <%= button_tag "Submit", type: "submit", class: "btn btn-info btn-lg btn-block" %>
                 </div>
