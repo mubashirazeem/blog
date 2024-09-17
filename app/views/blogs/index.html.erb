@@ -17,9 +17,21 @@
       <div class="col-12">
         <div class="title-bordered mb-5 d-flex align-items-center">
           <ul class="list-inline social-icons ml-auto mr-3 d-none d-sm-block">
-            <li class="list-inline-item"><% if user_signed_in? %>
-              <%= link_to "New Blog", new_blog_path , class: "btn btn-info btn-lg btn-block"%>
-              <% end %></li>
+            <li class="list-inline-item">
+              <% if user_signed_in? %>
+                <% if current_user.payment_status == 'not_paid' %>
+                  <%= "Want to add a blog?" %>
+                  <%= button_to "To Stripe", stripe_index_path, class: "btn btn-info btn-lg", style: "margin-left: 30px;", data: { turbo: false } %>
+                <% elsif current_user.payment_status == 'paid' %>
+                  <%= link_to "New Blog", new_blog_path, class: "btn btn-info btn-lg btn-block" %>
+                <% else %>
+                  <%= "Unknown payment status. Contact support for assistance." %>
+                <% end %>
+              <% else %>
+                <%= "Please sign in to add blog" %>
+                <%= link_to "Sign In", new_user_session_path, class: "btn btn-info btn-lg" %>
+              <% end %>
+            </li>
           </ul>
         </div>
       </div>
@@ -27,7 +39,7 @@
 </section>
 
 <div class= "container rounded">
-  <h1 class="text-center mb-4">Blogs</h1>
+  <h1 class="text-center mb-4 mt-3">Blogs</h1>
   <ul>
     <% @blogs.each do |blog| %>
       <%= render blog  %>
@@ -40,6 +52,3 @@
   </ul>
   
 </div>
-
-
-
